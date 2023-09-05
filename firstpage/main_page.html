@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang ="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equic="X-UA-Compatible" contents="IE=edge">
+        <meta name="viewport" content="width=deivce-width, initial-scale=1.0">
+        <title>Shop</title>
+        <link rel="stylesheet" type="text/css" href="style2.css">
+
+    </head>
+    <body>
+        <div class="container">
+            <div class="cards">
+                <img src="grocery-list-1024x536.jpg" alt="">
+                <div class="card-img"></div>
+                <h2>Grocery</h2>
+                <p>Fresh groceries at your call</p>
+                <div class="card-body"></div>
+                <div class="card-footer">
+                    <a href="index.html">
+                 <button id="btn" value="Grocery">Shop now</button>
+                </a>
+                </div>
+            </div>
+    
+
+          <div class="cards">
+            <img src="1.jpg" alt="">
+            <div class="card-img"></div>
+            <h2> Medicines</h2>
+            <p>Easy and Fast medicine purchase</p>
+            <div class="card-body"></div>
+            <div class="card-footer">
+                <a href ="index2.html">
+               <button id="btn1" value="Medicine">Shop now</button>
+                </a>
+            </div>
+           </div>
+        </div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/7.14.1-0/firebase.js"></script>
+        <script src="fire.js"></script>
+        <script type="module">
+            import { initializeApp } from "https://www.gstatic.com/firebasejs/9.19.0/firebase-app.js";
+            import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.19.0/firebase-analytics.js";
+            const firebaseConfig = {
+              apiKey: "AIzaSyDn7H2HFy1GzfGShua9SxYAzQeybJqrnb4",
+              authDomain: "delivery-robot-b5a61.firebaseapp.com",
+              databaseURL: "https://delivery-robot-b5a61-default-rtdb.firebaseio.com",
+              projectId: "delivery-robot-b5a61",
+              storageBucket: "delivery-robot-b5a61.appspot.com",
+              messagingSenderId: "604341999740",
+              appId: "1:604341999740:web:d463e709377e19959bd1f9",
+              measurementId: "G-WGJQCJX02D"
+            };
+            firebase.initializeApp(firebaseConfig);
+            const app = initializeApp(firebaseConfig);
+            const analytics = getAnalytics(app);
+        var shopFormDB = firebase.database().ref("deliveryrobot");
+        var parentRef = firebase.database().ref('deliveryrobot');
+        var newChildRef = parentRef.child('customer info');
+document.getElementById("btn").addEventListener("click", submitForm);
+document.getElementById("btn1").addEventListener("click",submitForm1);
+function submitForm(e) {
+var shop  = getElementVal("btn");
+ saveMessages(shop);
+}
+function submitForm1(e) {
+var shop  = getElementVal("btn1");
+saveMessages(shop);
+}
+const saveMessages = (shop) => {
+var newshopForm = shopFormDB.push();
+newChildRef.set({
+   shop,
+});
+};
+const getElementVal = (id) => {
+  return document.getElementById(id).value;
+};
+ </script>
+</body>
+</html>
